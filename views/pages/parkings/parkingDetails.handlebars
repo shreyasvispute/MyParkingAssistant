@@ -1,0 +1,170 @@
+<div class="container">
+  <div class="row">
+    <img
+      src="{{parkdata.parkingImg}}"
+      onerror="this.onerror=null;this.src='../public/images/no_image.jpg';"
+      class="card-img-top"
+      alt="Parking Image"
+    />
+
+    <div class="col">
+      <dl>
+        <dt>Address</dt>
+        <dd>
+          <p class="address">{{parkdata.address}}</p>
+        </dd>
+        <dt>City</dt>
+        <dd>
+          <p class="city">{{parkdata.city}}</p>
+        </dd>
+        <dt>Zip</dt>
+        <dd>
+          <p class="zip">{{parkdata.zip}}</p>
+        </dd>
+        <dt>OverallRating</dt>
+        <dd>
+          <span>&#11088;</span>
+          <span>{{parkdata.overallRating}}</span>
+        </dd>
+      </dl>
+
+    </div>
+
+    <div class="col">
+      <h2>Write a review</h2>
+      <form
+        id="login-form"
+        name="loginForm"
+        action="/reviews/{{parkdata._id}}"
+        method="POST"
+      >
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">
+            Rating
+            <select
+              class="form-control"
+              name="rating"
+              id="exampleFormControlSelect1"
+            >
+              <option>1 Star </option>
+              <option>2 Stars </option>
+              <option>3 Stars </option>
+              <option>4 Stars </option>
+              <option>5 Stars </option>
+            </select>
+          </label><br />
+        </div>
+        <label for="exampleFormControlTextarea1">Review
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            name="comment"
+            rows="3"
+            cols="30"
+            placeholder="Enter your Review"
+            required
+          ></textarea>
+        </label><br />
+        <button class="btn btn-primary">Post a Review</button>
+      </form>
+      <h3>Reviews</h3>
+      {{#each parkdata.parkingReviews}}
+        <div class="reviews">
+          <div class="card-full">
+            <h3 class="username">Username: {{username}}</h3>
+            <h4>Rating: {{rating}}</h4>
+            <p>{{comment}}<br />
+              {{dateOfReview}}</p>
+
+            {{#if isReviewer}}
+              <!-- Button trigger modal -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-toggle="modal"
+                data-target="#exampleModal"
+              >Edit Review</button>
+              <a
+                class="btn btn-danger"
+                onclick="return confirm('Are you sure?')"
+                href="../reviews/deleteReview/{{_id}}"
+              >Delete Review</a>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <form action="/reviews/updateReview/" method="POST">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit
+                          Review</h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card-wide">
+                          <h2>Edit Review</h2>
+                          <label>Rating
+                            <select name="rating">
+                              <option>1 Star </option>
+                              <option>2 Stars </option>
+                              <option>3 Stars </option>
+                              <option>4 Stars </option>
+                              <option>5 Stars </option>
+                            </select>
+                          </label>
+                          <p></p>
+                          <label>Review
+                            <textarea
+                              name="comment"
+                              rows="3"
+                              cols="30"
+                              required
+                            >{{comment}}</textarea>
+                          </label>
+                          <input name="reviewId" value="{{_id}}" hidden />
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal"
+                        >Close</button>
+                        <button type="submit" class="btn btn-primary">Post
+                          Review!</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+  {{#if hasError}}
+    <div class="error">
+      <ul>
+        {{#each error}}
+          <li>
+            {{this}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+</div>

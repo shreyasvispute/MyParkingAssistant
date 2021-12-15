@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row navigators">
+
+    <a href="/parkings/create" id="createParkings" class="">Create a new parking</a>
+  </div>
+  <div class="row">
+    {{#each parkdata}}
+      <div class="col-sm-4">
+        <div class="card">
+          <img
+            src={{parkingImg}}
+            onerror="this.onerror=null;this.src='../public/images/no_image.jpg';"
+            class="card-img-top"
+            alt="Parking Image"
+          />
+
+          <div class="card-body">
+            <p class="card-title">{{address}}</p>
+            <span class="star">&#11088;</span>
+            <span class="rating">{{overallRating}}</span>
+
+            <p class="card-text">{{zip}}</p>
+            <a
+              href="parkings/edit/{{_id}}"
+              id="editParkings_{{_id}}"
+              class="btn btn-primary"
+            >Edit</a>
+            <a
+              onclick="return confirm('Are you sure?')"
+              href="parkings/delete/{{_id}}"
+              id="getParkingsDelete_{{_id}}"
+              class="btn btn-danger"
+            >Delete</a>
+
+            {{!-- <input
+              type="hidden"
+              id="parkingID"
+              name="parkingID"
+              value={{_id}}
+            /> --}}
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <div class="container alert alert-warning"><p class="empty">No content</p></div>
+    {{/each}}
+    {{#if success}}
+      {{{successmsg}}}
+    {{else}}
+      {{errmsg}}
+    {{/if}}
+  </div>
+</div>

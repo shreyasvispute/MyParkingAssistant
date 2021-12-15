@@ -1,0 +1,148 @@
+<div class="container">
+  <div class="row navigators">
+    <a href="/parkings" id="viewParkings" class="">View my parkings</a>
+  </div>
+  <form
+    method="POST"
+    id="createParkingForm"
+    action="/parkings/post"
+    onsubmit="createParkingValidation(event);"
+    enctype="multipart/form-data"
+  >
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="listerId">Lister Id</label>
+        <input
+          type="text"
+          class="form-control"
+          id="listerId"
+          name="listerId"
+          placeholder="Lister Id"
+          readonly
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label class="" for="parkingImg">Upload Image</label>
+        <input
+          type="file"
+          class="form-control"
+          id="parkingImg"
+          name="parkingImg"
+        />
+      </div>
+
+    </div>
+    {{! <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="longitude">Longitude</label>
+        <input
+          type="text"
+          class="form-control"
+          id="longitude"
+          name="longitude"
+          placeholder="Longitude"
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="latitude">Latitude</label>
+        <input
+          type="text"
+          class="form-control"
+          id="latitude"
+          name="latitude"
+          placeholder="Latitude"
+        />
+      </div>
+    </div> }}
+
+    <div class="form-row">
+
+      <div class="form-group col-md-6">
+        <label for="address">Address</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          name="address"
+          placeholder="1234 Main St"
+          required
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="category">Vehicle Category</label>
+        <select
+          id="category"
+          name="category"
+          class="form-control"
+          multiple
+          size="2"
+          required
+          aria-label="multiple vehicle type"
+        >
+          <option>sedan</option>
+          <option>suv</option>
+          <option>coupe</option>
+          <option>pickup truck</option>
+          <option>minivan</option>
+          <option>station wagon</option>
+          <option>hatchback</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="parkingType">Parking Type</label>
+        <select
+          id="parkingType"
+          name="parkingType"
+          required
+          class="form-control"
+        >
+          <option value="" selected>Select type...</option>
+          <option>open</option>
+          <option>closed</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="city">City</label>
+        <input
+          type="text"
+          required
+          class="form-control"
+          id="city"
+          name="city"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="state">State</label>
+        <select id="state" name="state" required class="form-control">
+          <option value="" selected>Select State...</option>
+
+          {{#each states}}
+            <option>{{this}}</option>
+          {{/each}}
+
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="zip">Zip</label>
+        <input type="text" required class="form-control" id="zip" name="zip" />
+      </div>
+    </div>
+    <button
+      type="submit"
+      id="btnCreateParking"
+      class="btn btn-primary"
+    >Create</button>
+  </form>
+  {{#if success}}
+    <div class="alert alert-success successmsg" role="alert">
+      Parking successfully created!
+    </div>
+  {{/if}}
+
+  <div class="alert alert-danger error" id="uiError" role="alert">
+  </div>
+
+</div>

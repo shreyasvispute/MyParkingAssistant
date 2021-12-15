@@ -1,0 +1,41 @@
+<form method="POST" id="loginForm">
+  <div class="card-body p-5 text-center">
+    <div class="form-outline mb-4">
+      <label class="form-label" for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="username"
+        class="form-control form-control-lg"
+      />
+    </div>
+
+    <div class="form-outline mb-4">
+      <label class="form-label" for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="password"
+        class="form-control form-control-lg"
+      />
+    </div>
+    <button
+      class="btn btn-primary btn-lg btn-block"
+      id="loginbtn"
+      type="submit"
+    >Login</button>
+    <div class="alert alert-danger error" id="uiError" role="alert" hidden>
+    </div>
+
+    <div class="alert alert-danger" id="login-error" role="alert"></div>
+
+    <div class="spinner-border spinner" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+
+    <a href="/users/createProfile">Don't have an account? Click to create an
+      account</a>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+<main>
+    <div class="card-wide">
+        <h2>Edit Review</h2>
+        <form if="edit-review" action="/reviews/updateReview/" enctype="multipart/form-data" method="POST">
+            <label for="rating"><h3>Rating</h3>
+                <input type="text" id="rating" name="rating" value={{rating}} class="inputFields">
+            </label>
+            <br>
+            <label for="comment"><h3>Review</h3>
+                <input type="text" id="comment" name="comment" value="{{comment}}" class="inputFields">
+            </label>
+            <button type="submit" class="btn btn-primary">Post</button>
+            <input name="reviewId" value="{{reviewId}}" hidden />
+        </form>
+    </div>
+    <div>
+        {{#if hasError}}
+        <div class="error">
+            <ul>
+                {{#each error}}
+                    <li>
+                        {{this}}
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/if}}
+    </div>
+</main> 

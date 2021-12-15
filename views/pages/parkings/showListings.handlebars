@@ -1,0 +1,51 @@
+<div class="container">
+  {{!-- <a href="/parkings/create" id="createParkings" class="">Create a new parking</a> --}}
+  {{#if hasErrors}}
+      <div class="alert alert-danger error" role="alert">
+        {{error}}
+      </div>
+    {{/if}}
+  <div class="row">
+    {{#each bookingdata}}
+      <div class="col-sm-4">
+        <div class="card">
+          {{!-- <img src={{parkingImg}} class="card-img-top" alt="Parking Image" /> --}}
+          <div class="card-body">
+            {{!-- <h5 class="card-title">{{address}}</h5> --}}
+            {{!-- <span class="card-text">{{startDate}}</span> --}}
+
+            <label>Start Date</label><p class="card-text">{{startDate}}</p>
+            <label>End Date</label><p class="card-text">{{endDate}}</p>
+            <label>Time slot</label><p class="card-text">{{timeSlots}}</p>
+            <label>Price</label><p class="card-text">{{price}}</p>
+            <label>Booked</label><p class="card-text">{{booked}}</p>
+            <label>Numberplate</label><p class="card-text">{{numberPlate}}</p>
+            
+            <a href="/listings/updateListing/{{_id}}" class="btn btn-primary">Update</a>
+            
+              <a
+                onclick="return confirm('Are you sure?')"
+                href="/listings/removeListing/{{_id}}"
+                {{!-- id="getParkingsDelete_{{_id}}" --}}
+                class="btn btn-danger"
+              >Delete</a>
+            {{!-- Pending: call listing update for updating booked, booker id
+            remove from users bookings list --}}
+
+            {{!-- <input
+              type="hidden"
+              id="parkingID"
+              name="parkingID"
+              value={{_id}}
+            /> --}}
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <div class="container alert alert-warning"><p class="empty">No content</p></div>
+    {{/each}}
+    {{#if success}}
+      {{{successmsg}}}
+    {{/if}}
+  </div>
+</div>

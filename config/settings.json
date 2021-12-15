@@ -1,0 +1,8 @@
+{
+  "mongoConfig": {
+    "serverUrl": "mongodb://localhost:27017/",
+    "database": "CS546_G8"
+  },
+  "apikey": "AIzaSyAgiEctdZoEnqGTU9k2ewFp_qvZmFYl7hM",
+  "geocodingKey": "5fc9eb24092f2d9673b7c34ac5206b30"
+}

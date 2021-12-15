@@ -1,0 +1,11 @@
+<div class="col-sm-4">
+    <img src={{parkingImg}} class="" alt="Parking Image" />
+    <div class="">
+        <h5 class="">{{parkdata.address}}</h5>
+        <p class="">{{parkdata.zip}}</p>
+        {{#each parkdata.parkingReviews}}
+            <p class="">{{comment}}</p>
+        {{/each}}
+        <a href="/reviews" class="btn btn-primary">Submit</a>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+
+<br>
+<a href="/listings/createListingPage">Create Listing</a>
+<br>
+{{#if hasErrors}}
+  <div class="alert alert-danger error" role="alert">
+    {{error}}
+  </div>
+{{/if}}
+<div class="card">
+          {{!-- <iframe
+            width="280"
+            height="300"
+            style="border:0"
+            loading="lazy"
+            src="{{mapUrl}}"
+          ></iframe> --}}
+          {{!-- <img src={{parkingImg}} class="card-img-top" alt="Parking Image" /> --}}
+          <div class="card-body">
+            <label>Address</label>
+            <h2 class="card-title">{{getData.address}}
+            </h2>
+            <label>City</label>
+            <h3 class="card-title">{{getData.city}}
+            </h3>
+            <span class="star">&#11088;</span>
+            <span class="rating">{{getData.overallRating}}</span>
+            <label>Zip code</label>
+            <p class="card-text">{{getData.zip}}</p>
+
+          </div>
+        </div>
+<br>
+{{#if getData.listing.length}}
+  <div class="row">
+
+    {{#each getData.listing}}
+      <div class="col-sm-4">
+        <div class="card">
+          {{!-- <img src={{parkingImg}} class="card-img-top" alt="Parking Image" /> --}}
+          <div class="card-body">
+            <label>Start Date</label><p class="card-text">{{startDate}}</p>
+            <label>End Date</label><p class="card-text">{{endDate}}</p>
+            <label>Time slot</label><p class="card-text">{{timeSlots}}</p>
+            <label>Price</label><p class="card-text">{{price}}</p>
+            
+            <a href="/listings/getListing/{{_id}}" class="btn btn-primary">Book</a>
+            {{!-- {{#if booked != true}} --}}
+              <a href="/listings/updateListing/{{_id}}" class="btn btn-primary">Update</a>
+            
+              <a
+                onclick="return confirm('Are you sure?')"
+                href="/listings/removeListing/{{_id}}"
+                class="btn btn-danger"
+              >Delete</a>
+
+          </div>
+        </div>
+      </div>
+
+    {{/each}}
+  </div>
+
+{{/if}}

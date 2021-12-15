@@ -1,0 +1,135 @@
+<div class="container dashboardFilter">
+  <form
+    class="form-inline mt-5 mt-md-3"
+    id="searchZip"
+    method="POST"
+    action="/search"
+    onsubmit="searchValidation(event);"
+  >
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <input
+          class="form-control mr-sm-2"
+          type="text"
+          placeholder="City"
+          aria-label="Search by city"
+          id="citySearch"
+          name="citySearch"
+          value="{{citySearch}}"
+        />
+
+        <input
+          class="form-control mr-sm-2"
+          type="text"
+          placeholder="Zip Code"
+          aria-label="Zip Code"
+          id="zipSearch"
+          name="zipSearch"
+          value="{{zipSearch}}"
+        />
+        <select
+          id="stateSearch"
+          name="stateSearch"
+          class="form-control mr-sm-2"
+        >
+          {{#if stateSelected}}
+            {{{selectedStates}}}
+          {{else}}
+            <option selected>Select State</option>
+            {{#each states}}
+              <option>{{this}}</option>
+            {{/each}}
+
+          {{/if}}
+
+        </select>
+        <select
+          id="parkingType"
+          name="parkingType"
+          class="form-control mr-sm-2"
+        >
+          {{#if selectedPType}}
+            {{{selectedType}}}
+          {{else}}
+            <option selected>Select Type</option>
+            <option>open</option>
+            <option>closed</option>
+
+          {{/if}}
+
+        </select>
+
+        <button
+          class="btn btn-outline-success my-2 my-sm-0"
+          type="submit"
+          id="btnMainSearch"
+        >Search</button>
+      </div>
+    </div>
+  </form>
+
+  {{#if hasErrors}}
+    <div class="alert alert-danger error" role="alert">
+      {{error}}
+    </div>
+  {{/if}}
+  <div class="alert alert-danger error" id="uiError" role="alert">
+  </div>
+
+</div>
+
+<div class="parkingCards">
+
+  {{#if listingsData}}
+    <div class="row">
+
+      {{#each listingsData}}
+
+        <div class="col-sm-4">
+          <div class="card">
+            <iframe
+              width="280"
+              height="300"
+              style="border:0"
+              loading="lazy"
+              src="{{mapUrl}}"
+            ></iframe>
+            {{!-- <img src={{parkingImg}} class="card-img-top" alt="Parking Image" /> --}}
+            <div class="card-body">
+              <p class="card-title">{{address}}
+              </p>
+              <span class="star">&#11088;</span>
+              <span class="rating">{{overallRating}}</span>
+
+              <p class="card-text">{{zip}}</p>
+              <a href="/parkings/{{_id}}" class="btn btn-primary">Details</a>
+
+              <a
+                href="/listings/getAllListing/{{_id}}"
+                class="btn btn-success"
+              >Book</a>
+
+              <input
+                type="hidden"
+                id="listingId_{{_id}}"
+                name="listingId"
+                value={{_id}}
+              />
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+  {{else}}
+    <div class="alert alert-info error-show" role="alert">
+      <p>Search for parking using the filters!</p>
+    </div>
+
+  {{/if}}
+  {{#if notfound}}
+    <div class="alert alert-info error-notfound" role="alert">
+      <p>Sorry we couldn't find any parkings with that search!</p>
+    </div>
+  {{/if}}
+</div>
